@@ -5,7 +5,7 @@ package hu.frontrider.windowutil.util
 class FPSManager {
     private var oldTime = 0.0f
 
-    private var frameTime = 0.0;
+    private var frameTime = 0.0
     private var frames = 0
     private var currentFramesPerSecond = 0
 
