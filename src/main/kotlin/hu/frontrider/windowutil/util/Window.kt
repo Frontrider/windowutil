@@ -69,8 +69,9 @@ class Window(val width: Int,
 
     }
 
-    fun enable2DTextureMode() {
-        glEnable(GL_TEXTURE_2D)
+    fun enable(enable:Int)
+    {
+        glEnable(enable)
     }
 
     fun shouldClose(): Boolean {

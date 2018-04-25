@@ -6,6 +6,7 @@ import hu.frontrider.windowutil.graphics.TexturedModel
 import hu.frontrider.windowutil.input.InputMethod
 import hu.frontrider.windowutil.util.Window
 import org.lwjgl.glfw.GLFW
+import org.lwjgl.opengl.GL11.GL_TEXTURE_2D
 
 fun main(args: Array<String>) {
 
@@ -16,7 +17,7 @@ fun main(args: Array<String>) {
             fullScreen = false,
             title = "render utils")
 
-    window.enable2DTextureMode()
+    window.enable(GL_TEXTURE_2D)
     window.setClearColor(1f, 0f, 1f)
 
     val vertices = arrayOf(
