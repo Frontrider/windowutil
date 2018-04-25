@@ -80,7 +80,6 @@ fun main(args: Array<String>) {
 
     window.loop(
             renderCallback = {
-                println("draw")
                 model.render(0)
             }
     )

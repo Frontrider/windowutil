@@ -85,9 +85,10 @@ class Window(val width: Int,
         setClearColor(r, g, b, 1f)
     }
 
-    fun loop(renderCallback: (Window) -> Unit) {
+    fun loop(renderCallback: (Window) -> Unit,updateCallback:(Window)->Unit ={}) {
         while (!shouldClose()) {
             inputManager.handleInput()
+            updateCallback.invoke(this)
             render(renderCallback)
         }
         shutdown()
@@ -110,8 +111,8 @@ class Window(val width: Int,
             glfwSwapBuffers(window)
             if (!runConstantly)
                 draw = false
-            frameManager.render()
         }
+        frameManager.render()
     }
 
     fun markDirty() {

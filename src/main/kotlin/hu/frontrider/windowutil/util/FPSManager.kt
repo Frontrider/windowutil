@@ -1,6 +1,5 @@
 package hu.frontrider.windowutil.util
 
-
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 class FPSManager {
     private var oldTime = 0.0f
