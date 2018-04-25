@@ -5,4 +5,4 @@ It's very bare bones, basicly just all the functions you need to get LWJGL up an
 
 Also has a simple input handler, using callback functions.
 
-Example implementation is in the test folder.
+Example implementation is in the test folder, use the "run" folder as the working directory
