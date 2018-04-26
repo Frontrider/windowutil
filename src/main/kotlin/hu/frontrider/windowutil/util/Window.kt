@@ -29,7 +29,8 @@ class Window(val width: Int,
     val mouseInputHandler: MouseHandler
         get() = mouseHandler!!
 
-    private var window: Long = 0
+    val window: Long
+
     private var draw = true
 
     init {
