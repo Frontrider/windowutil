@@ -3,6 +3,7 @@ package hu.frontrider.windowutil.util
 import hu.frontrider.windowutil.graphics.Shader
 import hu.frontrider.windowutil.input.InputManager
 import hu.frontrider.windowutil.input.KeyboardHandler
+import hu.frontrider.windowutil.input.MouseHandler
 import org.lwjgl.Version
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.glfw.GLFWErrorCallback
@@ -15,6 +16,7 @@ class Window(val width: Int,
              val height: Int,
              val title: String,
              val keyboardHandler: KeyboardHandler = KeyboardHandler(),
+             private var mouseHandler: MouseHandler? = null,
              val inputManager: InputManager = InputManager(keyboardHandler),
              val runConstantly: Boolean = false,
              private val shaders: ArrayList<Shader> = ArrayList(),
@@ -22,7 +24,10 @@ class Window(val width: Int,
              posY: Int = -1,
              val frameManager: FPSManager = FPSManager(),
              fullScreen: Boolean = false
-             ) {
+) {
+
+    val mouseInputHandler: MouseHandler
+        get() = mouseHandler!!
 
     private var window: Long = 0
     private var draw = true
@@ -50,7 +55,11 @@ class Window(val width: Int,
             throw IllegalStateException("Failed to create window")
         }
 
+        mouseHandler = MouseHandler(window)
+        inputManager.setMouseHandler(mouseHandler!!)
+
         glfwSetKeyCallback(window, keyboardHandler)
+        mouseHandler!!.init()
 
         if (!fullScreen) {
             val videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor())!!
@@ -69,8 +78,7 @@ class Window(val width: Int,
 
     }
 
-    fun enable(enable:Int)
-    {
+    fun enable(enable: Int) {
         glEnable(enable)
     }
 
@@ -86,7 +94,7 @@ class Window(val width: Int,
         setClearColor(r, g, b, 1f)
     }
 
-    fun loop(renderCallback: (Window) -> Unit,updateCallback:(Window)->Unit ={}) {
+    fun loop(renderCallback: (Window) -> Unit, updateCallback: (Window) -> Unit = {}) {
         while (!shouldClose()) {
             inputManager.handleInput()
             updateCallback.invoke(this)

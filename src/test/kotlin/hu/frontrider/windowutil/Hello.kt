@@ -5,7 +5,7 @@ import hu.frontrider.windowutil.graphics.Shader
 import hu.frontrider.windowutil.graphics.TexturedModel
 import hu.frontrider.windowutil.input.InputMethod
 import hu.frontrider.windowutil.util.Window
-import org.lwjgl.glfw.GLFW
+import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL11.GL_TEXTURE_2D
 
 fun main(args: Array<String>) {
@@ -49,30 +49,92 @@ fun main(args: Array<String>) {
     window.addShader(shader)
     val model = TexturedModel(vertices, indices, texture, "./res/snowball.png")
 
-    window.inputManager.addKeyCallback(
-            GLFW.GLFW_KEY_F5,
+    window.inputManager.addInputCallback(
+            GLFW_KEY_F5,
             InputMethod.PRESS,
-            {
+            {->
                 window.markDirty()
                 true
             }
     )
 
-    window.inputManager.addKeyCallback(
-            GLFW.GLFW_KEY_F5,
+    window.inputManager.addInputCallback(
+            GLFW_KEY_F5,
             InputMethod.PRESS,
-            {
+            {->
                 println("this one is not supposed to show up")
                 true
             },
             100
     )
 
+    window.inputManager.addInputCallback(
+            GLFW_MOUSE_BUTTON_1,
+            InputMethod.MOUSE_PRESS,
+            {->
+                println("mouse clicked")
+                true
+            }
+    )
 
-    window.inputManager.addKeyCallback(
-            GLFW.GLFW_KEY_ESCAPE,
+    window.inputManager.addInputCallback(
+            GLFW_MOUSE_BUTTON_1,
+            InputMethod.MOUSE_RELEASE,
+            {->
+                println("mouse released")
+                true
+            }
+    )
+    window.inputManager.addInputCallback(
+            0,
+            InputMethod.MOUSE_SCROLL,
+            {x,y->
+                println("mouse Scrolled")
+                true
+            }
+    )
+
+    window.inputManager.addInputCallback(
+            0,
+            InputMethod.MOUSE_ENTERED,
+            {->
+                println("mouse entered")
+                true
+            }
+    )
+
+    window.inputManager.addInputCallback(
+            0,
+            InputMethod.MOUSE_LEFT,
+            {->
+                println("mouse left")
+                true
+            }
+    )
+    window.inputManager.addInputCallback(
+            0,
+            InputMethod.MOUSE_MOVED,
+            {x,y->
+                println("mouse moved")
+                true
+            }
+    )
+
+
+    window.inputManager.addInputCallback(
+            GLFW_MOUSE_BUTTON_1,
+            InputMethod.MOUSE_PRESS,
+            {->
+                println("mouse clicked, not showing")
+                true
+            },
+            100
+    )
+
+    window.inputManager.addInputCallback(
+            GLFW_KEY_ESCAPE,
             InputMethod.PRESS,
-            {
+            {->
                 window.close()
                 true
             }
